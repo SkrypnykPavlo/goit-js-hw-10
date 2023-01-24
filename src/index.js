@@ -34,3 +34,49 @@ function renderCountryData(countryData) {
     ref.countryInfo.innerHTML = createInfo(countryData[0]);
   }
 }
+
+function searchError(error) {
+  console.log(error);
+  Notify.failure('Oops, there is no country with that name');
+}
+
+function reset() {
+  ref.countryInfo.innerHTML = '';
+  ref.countryList.innerHTML = '';
+}
+
+function createList(countries) {
+  const result = countries
+    .map(
+      ({ name, flags }) =>
+        `<li class="item">
+                <img alt = "${name.common} flag" src = "${flags.svg}" width="50"> 
+                <span>${name.common}</span>
+            </li>`
+    )
+    .join('');
+  return result;
+}
+
+function createInfo(country) {
+  const { name, flags, capital, population, languages } = country;
+  const langs = Object.values(languages);
+  return `<div class=thumb>
+                <img alt = "${name.common} flag" 
+                    src = "${flags.svg}" 
+                    width="100"> 
+                <span>${name.common}</span>
+            </div>
+            <p class="prop">Official name:  
+                <span>${name.official}</span>
+            </p>
+            <p class="prop">Capital:  
+                <span>${capital}</span>
+            </p>
+            <p class="prop">Population:  
+                <span>${population}</span>
+            </p>
+            <p class="prop">Langueges:  
+                <span>${langs.toString().replaceAll(',', ', ')}</span>
+            </p>`;
+}

@@ -13,6 +13,9 @@ body {
 }
 
 #search-box {
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
   font: inherit;
   padding: 8px;
   max-width: 320px;
